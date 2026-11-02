@@ -3,10 +3,10 @@ function sortVipList(list) {
 }
 
 function addVipPoints(list, nickname, points) {
-  const found = list.find((user) => user.nickname === nickname);
-  if (found) {
-    found.points += points;
-    found.badge = found.points > 5000 ? 'VIP' : 'HOT';
+  const user = list.find((item) => item.nickname === nickname);
+  if (user) {
+    user.points += points;
+    user.badge = user.points >= 5000 ? 'VIP' : 'HOT';
   } else {
     list.push({ nickname, points, badge: 'HOT' });
   }

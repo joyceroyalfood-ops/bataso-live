@@ -21,10 +21,6 @@ const elements = {
 };
 
 const state = {
-  connection: {
-    username: '@bataso.brand',
-    status: 'offline'
-  },
   config: {
     maxSeats: 12,
     likeThreshold: 666,
@@ -35,13 +31,22 @@ const state = {
     musicEnabled: true,
     effectsEnabled: true,
     demoMode: true
+  },
+  connection: {
+    username: '@bataso.brand',
+    connected: false,
+    status: 'offline',
+    viewerCount: 128,
+    likes: 0,
+    comments: 0,
+    gifts: 0
   }
 };
 
-function applyState(data) {
+function renderState(data) {
   if (!data) return;
-  state.connection = data.connection || state.connection;
-  state.config = data.config || state.config;
+  state.config = { ...state.config, ...(data.config || {}) };
+  state.connection = { ...state.connection, ...(data.connection || {}) };
 
   elements.viewerValue.textContent = state.connection.viewerCount || 128;
   elements.likesValue.textContent = state.connection.likes || 0;
@@ -77,31 +82,30 @@ function emitSettings() {
   });
 }
 
-elements.connectBtn.addEventListener('click', () => {
-  const username = elements.username.value.trim() || '@bataso.brand';
+function sendConnect() {
+  const username = (elements.username.value || '@bataso.brand').trim();
   socket.emit('admin:connect', { username });
   state.connection.username = username;
   state.connection.status = 'live';
-  applyState({ connection: state.connection, config: state.config });
-});
+  renderState({ connection: state.connection, config: state.config });
+}
 
-elements.disconnectBtn.addEventListener('click', () => {
+function sendDisconnect() {
   socket.emit('admin:disconnect');
   state.connection.status = 'offline';
-  applyState({ connection: state.connection, config: state.config });
+  renderState({ connection: state.connection, config: state.config });
+}
+
+socket.on('connect', () => {
+  socket.emit('stage:ready');
 });
 
-Object.values({
-  maxSeats: elements.maxSeats,
-  likeThreshold: elements.likeThreshold,
-  seatTimeout: elements.seatTimeout,
-  smallGift: elements.smallGift,
-  largeGift: elements.largeGift,
-  ttsEnabled: elements.ttsEnabled,
-  musicEnabled: elements.musicEnabled,
-  effectsEnabled: elements.effectsEnabled,
-  demoMode: elements.demoMode
-}).forEach((input) => input.addEventListener('change', emitSettings));
+socket.on('state:sync', (data) => {
+  renderState(data);
+});
+
+elements.connectBtn.addEventListener('click', sendConnect);
+elements.disconnectBtn.addEventListener('click', sendDisconnect);
 
 document.querySelectorAll('[data-test]').forEach((button) => {
   button.addEventListener('click', () => {
@@ -117,12 +121,16 @@ document.getElementById('reset-vip-btn').addEventListener('click', () => {
   socket.emit('admin:reset-vip');
 });
 
-socket.on('connect', () => {
-  socket.emit('stage:ready');
-});
+Object.values({
+  maxSeats: elements.maxSeats,
+  likeThreshold: elements.likeThreshold,
+  seatTimeout: elements.seatTimeout,
+  smallGift: elements.smallGift,
+  largeGift: elements.largeGift,
+  ttsEnabled: elements.ttsEnabled,
+  musicEnabled: elements.musicEnabled,
+  effectsEnabled: elements.effectsEnabled,
+  demoMode: elements.demoMode
+}).forEach((field) => field.addEventListener('change', emitSettings));
 
-socket.on('state:sync', (data) => {
-  applyState(data);
-});
-
-applyState({ connection: state.connection, config: state.config });
+renderState({ connection: state.connection, config: state.config });

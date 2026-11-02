@@ -1,22 +1,16 @@
 # BATASO LIVE — Tây Sơn Edition
 
-Một dự án livestream tương tác dành cho thương hiệu Bataso, mang phong cách đường phố Việt Nam, 9:16, tối ưu cho TikTok LIVE Studio và OBS Browser Source.
+Một ứng dụng livestream tương tác cho thương hiệu Bataso, giao diện dọc 1080×1920, tối ưu cho TikTok LIVE Studio và OBS Browser Source.
 
 ## Mục tiêu
+- Tạo stage livestream hoàn chỉnh theo phong cách Việt Nam đêm phố Tây Sơn.
+- Sử dụng background Bataso đã upload làm nền chính.
+- Sử dụng logo Bataso làm logo thương hiệu.
+- Tự thiết kế host, bếp nướng, ghế, avatar, hiệu ứng tim, quà tặng, spotlight và khói bằng HTML/CSS/SVG.
+- Có Demo Mode cho người dùng thử join / like / gift mà không cần kết nối TikTok.
+- Có admin panel và backend Node.js + Socket.IO.
 
-- Tạo stage livestream chính thức với các khu vực header, host, ghế người xem, banner và footer.
-- Kết nối realtime bằng Socket.IO.
-- Quản lý ghế, quà tặng, VIP, TTS và demo mode từ admin panel.
-- Có thể chạy trên máy local bằng npm start.
-
-## Công nghệ chính
-
-- Node.js + Express
-- Socket.IO
-- HTML/CSS/JavaScript thuần
-- Browser Source phục vụ livestream
-
-## Cấu trúc
+## Cấu trúc thư mục
 
 ```text
 .
@@ -27,15 +21,15 @@ Một dự án livestream tương tác dành cho thương hiệu Bataso, mang ph
 ├── README.md
 ├── public/
 │   └── assets/
-│       ├── README.md
 │       ├── avatar_default.svg
-│       ├── batalso_logo.svg
 │       ├── bg_bataso_street.svg
+│       ├── bataso_logo.svg
 │       ├── blue_stool.svg
 │       ├── charcoal_stove.svg
 │       ├── crisp_piece.svg
 │       ├── particle_spark.svg
-│       └── red_stool.svg
+│       ├── red_stool.svg
+│       └── README.md
 ├── src/
 │   ├── css/
 │   │   ├── admin.css
@@ -51,6 +45,12 @@ Một dự án livestream tương tác dành cho thương hiệu Bataso, mang ph
 └──
 ```
 
+## Tài nguyên chính đã dùng
+- Background: `/assets/bg_bataso_street.svg`
+- Logo: `/assets/bataso_logo.svg`
+
+Các phần còn thiếu như host, ghế, lửa, khói, avatar, đĩa bánh tráng đã được tự tạo bằng CSS/SVG/Canvas và đặt dưới các layer riêng để có thể cập nhật realtime.
+
 ## Cài đặt
 
 ```bash
@@ -64,23 +64,20 @@ npm start
 ```
 
 Sau đó mở:
-
 - Admin: http://localhost:3000/
 - Stage: http://localhost:3000/stage.html
 
-## Demo mode
+## Demo Mode
+- Admin panel mặc định bật Demo Mode.
+- Stage sẽ tự tạo dữ liệu giả: người vào quán, comment, like, quà tặng.
+- Có thể dùng nút Test event trong admin để thử nhanh.
 
-- Admin panel có chế độ Demo Mode bật mặc định.
-- Khi mở stage, ứng dụng sẽ tạo dữ liệu giả từ backend để kiểm tra hiệu ứng, ghế, tim và quà tặng.
-- Panel admin có nút test event để thử join, comment, like, gift.
+## Kết nối TikTok LIVE
+- Nhập username TikTok trong admin.
+- Nhấn Connect.
+- Nếu chưa tích hợp channel thật, nền Demo Mode vẫn hoạt động bình thường để test giao diện và hiệu ứng.
 
-## Ghi chú tài nguyên
-
-Các file hình ảnh và âm thanh gốc chưa có sẵn trong repo. Thay vì dùng nhãn hiệu ngoài ý đồ, project đã dùng các placeholder SVG đơn giản trong public/assets. Bạn có thể thay bằng asset thật nếu muốn.
-
-## Lưu ý vận hành
-
-- Dùng Browser Source trong TikTok LIVE Studio với tỉ lệ 1080×1920.
-- Cấu hình stage ở dạng hiển thị dọc 9:16.
-- Tất cả layout có thể tùy chỉnh thêm trong file src/css/stage.css.
-- TTS sử dụng Speech Synthesis của trình duyệt, nên hoạt động tốt nhất trên Chrome/Edge.
+## Lưu ý
+- Mỗi layer giao diện có khả năng animate độc lập.
+- Dùng CSS và SVG để chuẩn bị thay asset thật nếu sau này muốn nâng cấp hình ảnh chất lượng hơn.
+- TTS dùng SpeechSynthesis của trình duyệt, nên hoạt động tốt nhất trên Chrome / Edge.

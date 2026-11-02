@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BATASO LIVE — Admin</title>
+    <title>BATASO LIVE Admin</title>
     <link rel="stylesheet" href="/src/css/admin.css" />
   </head>
   <body class="admin-page">
     <div class="admin-shell">
       <aside class="sidebar">
-        <div class="brand-mark">B</div>
+        <div class="brand-mark">
+          <img src="/assets/bataso_logo.svg" alt="Bataso logo" />
+        </div>
         <h1>BATASO ADMIN</h1>
         <p>Live control</p>
       </aside>
@@ -20,8 +22,8 @@
             <label for="username">TikTok username</label>
             <input id="username" type="text" value="@bataso.brand" />
             <div class="button-row">
-              <button id="connect-btn" class="primary">Connect</button>
-              <button id="disconnect-btn" class="secondary">Disconnect</button>
+              <button id="connect-btn" class="primary" type="button">Connect</button>
+              <button id="disconnect-btn" class="secondary" type="button">Disconnect</button>
             </div>
           </div>
 
@@ -52,23 +54,23 @@
 
         <section class="card controls">
           <div class="field-row">
-            <label>Số ghế tối đa</label>
+            <label for="max-seats">Số ghế tối đa</label>
             <input id="max-seats" type="number" value="12" min="4" max="20" />
           </div>
           <div class="field-row">
-            <label>Mốc tim</label>
+            <label for="like-threshold">Mốc tim</label>
             <input id="like-threshold" type="number" value="666" min="100" max="2000" />
           </div>
           <div class="field-row">
-            <label>Thời gian thay ghế (giây)</label>
+            <label for="seat-timeout">Thời gian thay ghế (giây)</label>
             <input id="seat-timeout" type="number" value="75" min="30" max="180" />
           </div>
           <div class="field-row">
-            <label>Ngưỡng quà nhỏ</label>
+            <label for="small-gift">Ngưỡng quà nhỏ</label>
             <input id="small-gift" type="number" value="10" min="1" max="50" />
           </div>
           <div class="field-row">
-            <label>Ngưỡng quà lớn</label>
+            <label for="large-gift">Ngưỡng quà lớn</label>
             <input id="large-gift" type="number" value="50" min="20" max="200" />
           </div>
 
@@ -83,12 +85,12 @@
         <section class="card action-panel">
           <h2>Test event</h2>
           <div class="button-row wrap">
-            <button data-test="join">User join</button>
-            <button data-test="comment">Comment</button>
-            <button data-test="like">Like</button>
-            <button data-test="gift">Gift</button>
-            <button id="reset-seats-btn">Reset ghế</button>
-            <button id="reset-vip-btn">Reset VIP</button>
+            <button type="button" data-test="join">User join</button>
+            <button type="button" data-test="comment">Comment</button>
+            <button type="button" data-test="like">Like</button>
+            <button type="button" data-test="gift">Gift</button>
+            <button id="reset-seats-btn" type="button">Reset ghế</button>
+            <button id="reset-vip-btn" type="button">Reset VIP</button>
           </div>
         </section>
       </main>

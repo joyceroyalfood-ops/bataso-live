@@ -3,28 +3,22 @@ function getEmptySeatIndex(seats) {
 }
 
 function assignSeat(seats, nickname, avatar = '/assets/avatar_default.svg') {
-  const index = getEmptySeatIndex(seats);
-  if (index < 0) return null;
+  const emptyIndex = getEmptySeatIndex(seats);
+  if (emptyIndex < 0) return null;
 
-  seats[index] = {
-    ...seats[index],
-    nickname,
-    avatar,
-    active: true,
-    lastSeen: Date.now()
-  };
-
-  return seats[index];
+  const nextSeat = { ...seats[emptyIndex], nickname, avatar, active: true, lastSeen: Date.now() };
+  seats[emptyIndex] = nextSeat;
+  return nextSeat;
 }
 
 function releaseSeat(seats, seatId) {
-  const target = seats.find((seat) => seat.id === seatId);
-  if (!target) return;
+  const targetSeat = seats.find((seat) => seat.id === seatId);
+  if (!targetSeat) return;
 
-  target.nickname = '';
-  target.avatar = '/assets/avatar_default.svg';
-  target.active = false;
-  target.lastSeen = 0;
+  targetSeat.nickname = '';
+  targetSeat.avatar = '/assets/avatar_default.svg';
+  targetSeat.active = false;
+  targetSeat.lastSeen = 0;
 }
 
 export { assignSeat, releaseSeat, getEmptySeatIndex };

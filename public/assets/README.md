@@ -6,70 +6,75 @@ html, body {
   margin: 0;
   min-height: 100%;
   font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: linear-gradient(180deg, #170f0e 0%, #261812 100%);
-  color: #f9f1d7;
+  background: linear-gradient(180deg, #130f0d 0%, #201511 100%);
+  color: #fff7ea;
 }
 
 body.admin-page {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  padding: 28px;
 }
 
 .admin-shell {
-  width: min(1100px, calc(100vw - 40px));
+  width: min(1200px, calc(100vw - 40px));
   min-height: 760px;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 230px 1fr;
+  background: rgba(30, 21, 17, 0.88);
+  border: 1px solid rgba(248, 207, 113, 0.2);
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(29, 19, 16, 0.9);
-  border: 1px solid rgba(255, 219, 135, 0.28);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
 }
 
 .sidebar {
-  background: linear-gradient(180deg, #3d261c, #1f120d);
-  padding: 28px 20px;
+  background: linear-gradient(180deg, #3d241e, #1d110d);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  padding: 28px 18px;
+  gap: 12px;
 }
 
 .brand-mark {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+  width: 120px;
+  height: 70px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #f9d978, #d76d2f);
-  color: #2b170f;
-  font-size: 2rem;
-  font-weight: 800;
+  background: rgba(255,255,255,0.9);
+  border-radius: 18px;
+}
+
+.brand-mark img {
+  width: 90%;
+  height: auto;
 }
 
 .sidebar h1 {
-  margin: 0;
-  font-size: 1.2rem;
+  margin: 6px 0 0;
+  font-size: 26px;
+  letter-spacing: 0.04em;
   text-align: center;
 }
 
 .sidebar p {
   margin: 0;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .panel {
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  padding: 24px;
 }
 
 .card {
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255, 211, 121, 0.22);
+  border: 1px solid rgba(247, 200, 103, 0.2);
   border-radius: 16px;
   padding: 18px;
 }
@@ -77,89 +82,95 @@ body.admin-page {
 .top-card {
   display: flex;
   justify-content: space-between;
-  align-items: end;
-  gap: 18px;
+  align-items: flex-end;
+  gap: 24px;
 }
 
 .connect-block {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 10px;
-  min-width: 280px;
 }
 
 .connect-block label,
 .field-row label {
-  font-size: 0.82rem;
-  color: #f1d6a1;
+  font-size: 14px;
+  color: #f3d6a4;
 }
 
-input[type="text"], input[type="number"] {
+input[type='text'],
+input[type='number'] {
   width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 211, 126, 0.2);
+  background: rgba(13, 10, 11, 0.28);
+  color: #fdf4e1;
   padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 214, 124, 0.2);
-  background: rgba(10, 9, 11, 0.38);
-  color: #fff3d7;
+  font-size: 16px;
 }
 
 .button-row {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 button {
-  border: 0;
-  border-radius: 10px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  color: #fff7ee;
+  font-size: 15px;
+  font-weight: 700;
   padding: 10px 16px;
   cursor: pointer;
-  font-weight: 700;
-  background: rgba(255,255,255,0.08);
-  color: #fff4dc;
 }
 
 button.primary {
-  background: linear-gradient(135deg, #efb54a, #d3642e);
-  color: #2d190f;
+  background: linear-gradient(135deg, #f5c86d, #dd7d2d);
+  color: #2b160f;
 }
 
 button.secondary {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.04);
 }
 
 .status-block {
-  min-width: 140px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  gap: 8px;
 }
 
 .status-label {
-  font-size: 0.7rem;
-  opacity: 0.8;
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 .status-badge {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  padding: 8px 14px;
+  align-items: center;
+  min-width: 130px;
+  padding: 10px 16px;
   border-radius: 999px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
 }
 
 .status-badge.live {
-  background: rgba(93, 192, 119, 0.16);
-  color: #b7f4c8;
-  border: 1px solid rgba(124, 232, 178, 0.4);
+  background: rgba(84, 194, 112, 0.14);
+  border: 1px solid rgba(125, 228, 157, 0.35);
+  color: #bbf7cb;
 }
 
 .status-badge.offline {
-  background: rgba(255, 255, 255, 0.05);
-  color: #f1d1a1;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #efd9a3;
 }
 
 .stats-grid {
@@ -169,31 +180,32 @@ button.secondary {
 }
 
 .stat-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255, 214, 124, 0.2);
-  border-radius: 14px;
   padding: 18px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(247, 200, 103, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  text-align: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .stat-box span {
-  font-size: 0.7rem;
+  font-size: 12px;
   text-transform: uppercase;
+  color: #f2d7a4;
   opacity: 0.8;
 }
 
 .stat-box strong {
-  font-size: 1.8rem;
+  font-size: 36px;
   font-weight: 800;
 }
 
 .controls {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .field-row {
@@ -205,14 +217,14 @@ button.secondary {
 .toggle-row {
   grid-column: 1 / -1;
   display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
   align-items: center;
-  color: #f0d69d;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #f2d29f;
 }
 
 .toggle-row label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
 }
