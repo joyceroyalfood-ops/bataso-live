@@ -1,0 +1,153 @@
+const vipList = [
+  { name: 'Mình Đức', coins: '8.420', badge: 'VIP' },
+  { name: 'Nhi Hân', coins: '7.950', badge: 'VIP' },
+  { name: 'Lan Anh', coins: '6.780', badge: 'V.I.P' },
+  { name: 'Tuấn Tú', coins: '5.900', badge: 'HOT' },
+];
+
+const comments = [
+  { name: 'Nguyễn Lan', text: 'Bánh tráng này ngon quá!' },
+  { name: 'Mình Đức', text: 'Cho em 1 combo nhé!' },
+  { name: 'Thanh Thảo', text: 'Giá tốt quá shop ơi' },
+  { name: 'Hoàng Nam', text: 'Ship Gia Lai không?' },
+  { name: 'Phương Anh', text: 'Có mẹ đơn không shop?' },
+  { name: 'Bảo Nhi', text: 'Đặt 2 hộp cho cả nhà' },
+];
+
+const seats = [
+  { name: 'Mình Đức', color: '#c9d5ff', active: true },
+  { name: 'Lan Anh', color: '#ffe0a6', active: true },
+  { name: 'Nhi Hân', color: '#f9d4bf', active: true },
+  { name: 'Bảo Nhi', color: '#d8f5d8', active: false },
+  { name: 'Hoàng Nam', color: '#ffd7d7', active: false },
+  { name: 'Duy', color: '#cde7ff', active: false },
+];
+
+const hearts = [
+  { label: 'Bánh tráng', value: 58 },
+  { label: 'Top 666', value: 86 },
+  { label: 'Cảm ơn', value: 100 },
+];
+
+function App() {
+  return (
+    <div className="page-shell">
+      <div className="live-stage">
+        <header className="topbar">
+          <div className="brand-block">
+            <div className="brand-mark">B</div>
+            <div className="brand-copy">
+              <div className="brand-main">BATASO LIVE</div>
+              <div className="brand-sub">ĐẶC SẢN TÂY SƠN · LIVESTREAM STUDIO</div>
+            </div>
+          </div>
+          <button className="camera-btn" type="button" aria-label="camera">
+            ◉
+          </button>
+        </header>
+
+        <section className="top-panel">
+          <div className="brand-chip">BATASO</div>
+          <div className="title-block">
+            <span className="intro-text">TINH HOA ĐẶC SẢN</span>
+            <span className="name-text">TÂY SƠN · BÌNH ĐỊNH</span>
+          </div>
+          <div className="status-pill">● ĐANG PHÁT</div>
+          <div className="vip-panel">
+            <div className="vip-header">TOP KHÁCH VIP</div>
+            <div className="vip-list">
+              {vipList.map((person) => (
+                <div key={person.name} className="vip-row">
+                  <span className="vip-name">{person.name}</span>
+                  <span className="vip-badge">{person.badge}</span>
+                  <span className="vip-coins">{person.coins}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="banner-panel">
+          <div className="banner-caption">TỪ HẠT GẠO QUÊ NHÀ</div>
+          <h1>
+            <span className="highlight">GIÒN THƠM</span>
+            <span className="line-break">VỊ QUÊ XỨ NÂU</span>
+          </h1>
+          <p>Đặc sản Tây Sơn · Tự hào hương vị Việt</p>
+        </section>
+
+        <section className="scene-area">
+          <div className="street-background">
+            <div className="lantern lantern-left" />
+            <div className="lantern lantern-right" />
+            <div className="roof-arch" />
+            <div className="store-sign">BATASO</div>
+            <div className="grill-glow" />
+            <div className="smoke smoke-1" />
+            <div className="smoke smoke-2" />
+            <div className="smoke smoke-3" />
+            <div className="host-figure">
+              <div className="host-head" />
+              <div className="host-body" />
+              <div className="host-arm arm-left" />
+              <div className="host-arm arm-right" />
+            </div>
+          </div>
+
+          <div className="counter-table">
+            <div className="product-display">
+              <div className="display-top">BATASO</div>
+              <div className="display-name">GAO GIÒN</div>
+              <div className="display-meta">150g · ĐẶC SẢN TÂY SƠN</div>
+              <div className="display-price">29.000đ</div>
+            </div>
+          </div>
+
+          <div className="seat-row">
+            {seats.map((seat, index) => (
+              <div key={seat.name} className={`seat ${seat.active ? 'active' : ''}`} style={{ '--seat-color': seat.color }}>
+                <div className="seat-avatar" />
+                <div className="seat-name">{seat.name}</div>
+                {seat.active && <div className="seat-plate">Bánh tráng</div>}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <aside className="comment-rail">
+          {comments.map((item) => (
+            <div key={item.name} className="comment-item">
+              <span className="comment-user">{item.name}</span>
+              <span className="comment-text">{item.text}</span>
+            </div>
+          ))}
+        </aside>
+
+        <div className="hearts-bar">
+          {hearts.map((heart) => (
+            <div key={heart.label} className="heart-item">
+              <span className="heart-label">{heart.label}</span>
+              <div className="heart-track">
+                <div className="heart-fill" style={{ width: `${heart.value}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="footer-banner">
+          <span>+ BATASO</span>
+          <span>BÁNH TRÁNG ĐẶC SẢN TÂY SƠN</span>
+          <span>GIÒN THƠM TỪNG MIẾNG</span>
+          <span>SẢN VIỆT NAM</span>
+          <span>• ỨNG HỘ ĐẶC</span>
+        </div>
+
+        <div className="disclaimer-box">
+          Không gian livestream giải trí tương tác. Quà tặng nhằm nhận hiệu ứng và lời chúc vui vẻ, không quy đổi thành tiền mặt hay giá trị khác.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
