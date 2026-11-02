@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BATASO LIVE — Admin</title>
+    <link rel="stylesheet" href="/src/css/admin.css" />
+  </head>
+  <body class="admin-page">
+    <div class="admin-shell">
+      <aside class="sidebar">
+        <div class="brand-mark">B</div>
+        <h1>BATASO ADMIN</h1>
+        <p>Live control</p>
+      </aside>
+
+      <main class="panel">
+        <section class="card top-card">
+          <div class="connect-block">
+            <label for="username">TikTok username</label>
+            <input id="username" type="text" value="@bataso.brand" />
+            <div class="button-row">
+              <button id="connect-btn" class="primary">Connect</button>
+              <button id="disconnect-btn" class="secondary">Disconnect</button>
+            </div>
+          </div>
+
+          <div class="status-block">
+            <div class="status-label">Trạng thái</div>
+            <div id="connection-status" class="status-badge offline">Offline</div>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <div class="stat-box">
+            <span>Viewer</span>
+            <strong id="viewer-value">128</strong>
+          </div>
+          <div class="stat-box">
+            <span>Likes</span>
+            <strong id="likes-value">0</strong>
+          </div>
+          <div class="stat-box">
+            <span>Comments</span>
+            <strong id="comments-value">0</strong>
+          </div>
+          <div class="stat-box">
+            <span>Gifts</span>
+            <strong id="gifts-value">0</strong>
+          </div>
+        </section>
+
+        <section class="card controls">
+          <div class="field-row">
+            <label>Số ghế tối đa</label>
+            <input id="max-seats" type="number" value="12" min="4" max="20" />
+          </div>
+          <div class="field-row">
+            <label>Mốc tim</label>
+            <input id="like-threshold" type="number" value="666" min="100" max="2000" />
+          </div>
+          <div class="field-row">
+            <label>Thời gian thay ghế (giây)</label>
+            <input id="seat-timeout" type="number" value="75" min="30" max="180" />
+          </div>
+          <div class="field-row">
+            <label>Ngưỡng quà nhỏ</label>
+            <input id="small-gift" type="number" value="10" min="1" max="50" />
+          </div>
+          <div class="field-row">
+            <label>Ngưỡng quà lớn</label>
+            <input id="large-gift" type="number" value="50" min="20" max="200" />
+          </div>
+
+          <div class="toggle-row">
+            <label><input id="tts-enabled" type="checkbox" checked /> TTS</label>
+            <label><input id="music-enabled" type="checkbox" checked /> Nhạc nền</label>
+            <label><input id="effects-enabled" type="checkbox" checked /> Hiệu ứng</label>
+            <label><input id="demo-mode" type="checkbox" checked /> Demo Mode</label>
+          </div>
+        </section>
+
+        <section class="card action-panel">
+          <h2>Test event</h2>
+          <div class="button-row wrap">
+            <button data-test="join">User join</button>
+            <button data-test="comment">Comment</button>
+            <button data-test="like">Like</button>
+            <button data-test="gift">Gift</button>
+            <button id="reset-seats-btn">Reset ghế</button>
+            <button id="reset-vip-btn">Reset VIP</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/src/js/admin.js"></script>
+  </body>
+</html>

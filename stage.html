@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BATASO LIVE — Stage</title>
+    <meta name="description" content="BATASO LIVE stage overlay" />
+    <link rel="stylesheet" href="/src/css/stage.css" />
+  </head>
+  <body class="stage-page">
+    <div id="live-stage" class="live-stage">
+      <header class="stage-header">
+        <div class="brand-wrap">
+          <div class="brand-badge">B</div>
+          <div class="brand-copy">
+            <div class="brand-title">BATASO</div>
+            <div class="brand-subtitle">Bánh tráng đặc sản Tây Sơn</div>
+          </div>
+        </div>
+
+        <div class="header-meta">
+          <span class="channel-name">@bataso.brand</span>
+          <span class="live-pill">● LIVE</span>
+          <span id="viewer-count" class="viewer-count">128 đang xem</span>
+        </div>
+      </header>
+
+      <section class="top-strip">
+        <div class="heart-meter">
+          <div class="meter-label">TÍCH LŨY TIM</div>
+          <div class="meter-bar">
+            <div id="heart-fill" class="meter-fill"></div>
+          </div>
+          <div id="heart-text" class="meter-value">0 / 666</div>
+        </div>
+
+        <div id="vip-panel" class="vip-panel"></div>
+      </section>
+
+      <section class="scene-area">
+        <div class="background-scene">
+          <div class="lantern lantern-left"></div>
+          <div class="lantern lantern-right"></div>
+          <div class="roof-arch"></div>
+          <div class="signboard">BÁNH TRÁNG BATASO</div>
+          <div class="stove-glow"></div>
+          <div class="host-scene">
+            <div class="host"> 
+              <div class="head"></div>
+              <div class="hat"></div>
+              <div class="body"></div>
+              <div class="arm left"></div>
+              <div class="arm right"></div>
+            </div>
+          </div>
+          <div class="smoke smoke-one"></div>
+          <div class="smoke smoke-two"></div>
+          <div class="smoke smoke-three"></div>
+        </div>
+
+        <div id="seat-container" class="seat-container"></div>
+      </section>
+
+      <aside id="comment-stream" class="comment-stream"></aside>
+
+      <footer class="stage-footer">
+        <div class="quick-actions">
+          <button type="button">Quà tặng</button>
+          <button type="button">Bếp nướng</button>
+          <button type="button">Trống hội</button>
+          <button type="button">Rao hàng</button>
+          <button type="button">Gọi khách</button>
+          <button type="button">Đơn hàng</button>
+        </div>
+
+        <div id="toast" class="toast"></div>
+
+        <div class="disclaimer-box">
+          Không gian livestream giải trí tương tác. Quà tặng nhằm nhận hiệu ứng và lời chúc vui vẻ, không quy đổi thành tiền mặt hay giá trị khác.
+        </div>
+      </footer>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/src/js/stage.js"></script>
+  </body>
+</html>

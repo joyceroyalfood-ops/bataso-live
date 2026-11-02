@@ -1,0 +1,128 @@
+const socket = io();
+
+const elements = {
+  username: document.getElementById('username'),
+  connectBtn: document.getElementById('connect-btn'),
+  disconnectBtn: document.getElementById('disconnect-btn'),
+  status: document.getElementById('connection-status'),
+  viewerValue: document.getElementById('viewer-value'),
+  likesValue: document.getElementById('likes-value'),
+  commentsValue: document.getElementById('comments-value'),
+  giftsValue: document.getElementById('gifts-value'),
+  maxSeats: document.getElementById('max-seats'),
+  likeThreshold: document.getElementById('like-threshold'),
+  seatTimeout: document.getElementById('seat-timeout'),
+  smallGift: document.getElementById('small-gift'),
+  largeGift: document.getElementById('large-gift'),
+  ttsEnabled: document.getElementById('tts-enabled'),
+  musicEnabled: document.getElementById('music-enabled'),
+  effectsEnabled: document.getElementById('effects-enabled'),
+  demoMode: document.getElementById('demo-mode')
+};
+
+const state = {
+  connection: {
+    username: '@bataso.brand',
+    status: 'offline'
+  },
+  config: {
+    maxSeats: 12,
+    likeThreshold: 666,
+    seatTimeout: 75,
+    smallGiftThreshold: 10,
+    largeGiftThreshold: 50,
+    ttsEnabled: true,
+    musicEnabled: true,
+    effectsEnabled: true,
+    demoMode: true
+  }
+};
+
+function applyState(data) {
+  if (!data) return;
+  state.connection = data.connection || state.connection;
+  state.config = data.config || state.config;
+
+  elements.viewerValue.textContent = state.connection.viewerCount || 128;
+  elements.likesValue.textContent = state.connection.likes || 0;
+  elements.commentsValue.textContent = state.connection.comments || 0;
+  elements.giftsValue.textContent = state.connection.gifts || 0;
+
+  elements.maxSeats.value = state.config.maxSeats || 12;
+  elements.likeThreshold.value = state.config.likeThreshold || 666;
+  elements.seatTimeout.value = state.config.seatTimeout || 75;
+  elements.smallGift.value = state.config.smallGiftThreshold || 10;
+  elements.largeGift.value = state.config.largeGiftThreshold || 50;
+  elements.ttsEnabled.checked = !!state.config.ttsEnabled;
+  elements.musicEnabled.checked = !!state.config.musicEnabled;
+  elements.effectsEnabled.checked = !!state.config.effectsEnabled;
+  elements.demoMode.checked = !!state.config.demoMode;
+
+  const statusClass = state.connection.status === 'live' ? 'live' : 'offline';
+  elements.status.textContent = state.connection.status === 'live' ? 'Live' : 'Offline';
+  elements.status.className = `status-badge ${statusClass}`;
+}
+
+function emitSettings() {
+  socket.emit('admin:update-settings', {
+    maxSeats: Number(elements.maxSeats.value),
+    likeThreshold: Number(elements.likeThreshold.value),
+    seatTimeout: Number(elements.seatTimeout.value),
+    smallGiftThreshold: Number(elements.smallGift.value),
+    largeGiftThreshold: Number(elements.largeGift.value),
+    ttsEnabled: elements.ttsEnabled.checked,
+    musicEnabled: elements.musicEnabled.checked,
+    effectsEnabled: elements.effectsEnabled.checked,
+    demoMode: elements.demoMode.checked
+  });
+}
+
+elements.connectBtn.addEventListener('click', () => {
+  const username = elements.username.value.trim() || '@bataso.brand';
+  socket.emit('admin:connect', { username });
+  state.connection.username = username;
+  state.connection.status = 'live';
+  applyState({ connection: state.connection, config: state.config });
+});
+
+elements.disconnectBtn.addEventListener('click', () => {
+  socket.emit('admin:disconnect');
+  state.connection.status = 'offline';
+  applyState({ connection: state.connection, config: state.config });
+});
+
+Object.values({
+  maxSeats: elements.maxSeats,
+  likeThreshold: elements.likeThreshold,
+  seatTimeout: elements.seatTimeout,
+  smallGift: elements.smallGift,
+  largeGift: elements.largeGift,
+  ttsEnabled: elements.ttsEnabled,
+  musicEnabled: elements.musicEnabled,
+  effectsEnabled: elements.effectsEnabled,
+  demoMode: elements.demoMode
+}).forEach((input) => input.addEventListener('change', emitSettings));
+
+document.querySelectorAll('[data-test]').forEach((button) => {
+  button.addEventListener('click', () => {
+    socket.emit('admin:test-event', button.dataset.test);
+  });
+});
+
+document.getElementById('reset-seats-btn').addEventListener('click', () => {
+  socket.emit('admin:reset-seats');
+});
+
+document.getElementById('reset-vip-btn').addEventListener('click', () => {
+  socket.emit('admin:reset-vip');
+});
+
+socket.on('connect', () => {
+  socket.emit('stage:ready');
+});
+
+socket.on('state:sync', (data) => {
+  applyState(data);
+});
+
+applyState({ connection: state.connection, config: state.config });
